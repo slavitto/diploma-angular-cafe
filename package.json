@@ -1,0 +1,24 @@
+{
+  "name": "diploma",
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "mongodb": "~2.2.26",
+    "express": "~4.15.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "slavitto",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slavitto/diploma-angular-cafe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/slavitto/diploma-angular-cafe/issues"
+  },
+  "homepage": "https://github.com/slavitto/diploma-angular-cafe"
+}

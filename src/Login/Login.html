@@ -1,0 +1,17 @@
+<div class="row">
+    <form class="col s12" ng-submit="login(user)">
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="username" type="text" class="validate" ng-model="user.username">
+                <label for="username">Username</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="email" type="email" class="validate" ng-model="user.email">
+                <label for="email">Email</label>
+            </div>
+        </div>
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+    </form>
+</div>

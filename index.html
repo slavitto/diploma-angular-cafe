@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="DroneCafeApp">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="src/css/materialize.css">
+    <title>Drone Space Cafe</title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-resource/angular-resource.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+    <script src="src/js/jquery-3.2.1.min.js"></script>
+    <script src="src/js/materialize.min.js"></script>
+    <script src="src/DroneCafeApp.js"></script>
+    <script src="src/Login/LoginCtrl.js"></script>
+    <script src="src/Menu/MenuCtrl.js"></script>
+    <script src="src/Kitchen/KitchenCtrl.js"></script>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Drone Space Cafe</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#!/login">Login</a></li>
+                <li><a href="#!/menu">Menu</a></li>
+                <li><a href="#!/kitchen">Kitchen</a></li>
+            </ul>
+        </div>
+    </nav>
+    <ng-view></ng-view>
+    <footer class="page-footer">
+        <div class="footer-copyright">
+            <div class="container">
+                Drone Space Cafe &copy; 2017
+            </div>
+        </div>
+    </footer>
+    </div>
+</body>
+
+</html>
