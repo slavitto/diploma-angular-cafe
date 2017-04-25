@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col s6">
+        <h3>Put an order</h3>
+        <menu-list ng-hide="hideMenu"></menu-list>
+        <p>
+            <button class="ng-hide btn white blue-text" ng-click="hideMenu=false" ng-show="hideMenu">Show menu</button>
+            <button class="btn" ng-click="hideMenu=true" ng-hide="hideMenu">Hide menu</button>
+        </p>
+    </div>
+    <div class="col s6">
+        <h3>My Table</h3>
+        <div class="row">
+            <div class="col s18 m9">
+                <div class="card horizontal">
+                    <i class="large material-icons yellow">perm_identity</i>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <p class="flow-text green-text">{{ customer.username }}</p>
+                        </div>
+                        <div class="card-action">
+                            <p class="flow-text">Credit: {{ customer.credit }}</p>
+                            <a class="waves-effect waves-light btn red"><i class="material-icons right" ng-click="addCredit()">add</i>Add credit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m9">
+                <ul class="collection with-header">
+                    <li class="collection-header green white-text">
+                        <h4>My Order</h4></li>
+                    <li class="collection-item" ng-repeat="order in orders">
+                        <div>{{ order.dish }}<span class="secondary-content">{{ order.state }}</span></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

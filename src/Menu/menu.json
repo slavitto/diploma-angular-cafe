@@ -1,0 +1,16 @@
+{ "drinks": [
+	{"name": "Beer", "price": 30},
+	{"name": "Vodka", "price": 30},
+	{"name": "Whiskey", "price": 75}
+	],
+"dishes": [
+	{"name": "Soup", "price": 36},
+	{"name": "Salad", "price": 45},
+	{"name": "Steak", "price": 105}
+	],
+"desserts": [
+	{"name": "Tiramisu", "price": 36},
+	{"name": "Icecream", "price": 39},
+	{"name": "Cheesecake", "price": 42}
+	] 
+}
