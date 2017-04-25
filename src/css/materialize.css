@@ -3387,6 +3387,12 @@ nav ul a span.badge {
   margin-bottom: 20px;
 }
 
+.row.my-menu {
+  margin: 0;
+  font-size: 20px;
+  line-height: 40px;
+}
+
 .row:after {
   content: "";
   display: table;
@@ -3486,6 +3492,14 @@ nav ul a span.badge {
   margin-left: auto;
   left: auto;
   right: auto;
+}
+
+.row .col.credit {
+  font-size: 12px;
+}
+
+.row .col.hidden {
+  visibility: hidden;
 }
 
 .row .col.offset-s1 {
@@ -5214,6 +5228,16 @@ small {
   line-height: 56px;
 }
 
+.btn-floating.btn-small {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.btn-floating.btn-custom {
+  float: right;
+}
+
 .btn-floating.halfway-fab {
   position: absolute;
   right: 24px;
@@ -5232,6 +5256,11 @@ small {
   color: #fff;
   font-size: 1.6rem;
   line-height: 40px;
+}
+
+.btn-floating.btn-small i {
+  font-size:10px;
+  line-height: 20px;
 }
 
 button.btn-floating {

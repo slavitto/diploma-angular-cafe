@@ -1,50 +1,28 @@
-DroneCafeApp
-.controller('LoginCtrl', function ($scope, $rootScope, AuthService) {
- 
-$scope.user = {
-  username: '',
-  email: ''
-}
+var socket = io('http://localhost:3000');
 
-$scope.login = function (user) {
-    AuthService.login(user).then(function () {
-      $rootScope.authenticated = true;
-    }, function () {
-      $rootScope.authenticated = false;
+DroneCafeApp
+.controller('LoginCtrl', function ($scope, $http, $location, $cookies, $rootScope) {
+  
+  $scope.user = {};
+  $cookies.remove('customer'); //logout
+
+  $scope.login = function(newUser) {
+    socket.emit('newUser', newUser);
+    socket.on('newCustomer', function(customer) {
+      $cookies.putObject('customer', customer);
+      $location.path('/mytable');
     });
-  };
-})
-.service('Session', function () {
-  this.create = function (sessionId, userId, userRole) {
-    this.id = sessionId;
-    this.userId = userId;
-    this.userRole = userRole;
-  };
-  this.destroy = function () {
-    this.id = null;
-    this.userId = null;
-    this.userRole = null;
-  };
-  return this;
-})
-.factory('AuthService', function ($http, Session) {
-  return {
-    login: function (user) {
-      return $http
-        .post('/!#/menu', user)
-        .then(function (res) {
-          Session.create(res.id, res.userid, res.role);
-        });
-    },
-    isAuthenticated: function () {
-      return !!Session.userId;
-    },
-    isAuthorized: function (authorizedRoles) {
-      if (!angular.isArray(authorizedRoles)) {
-        authorizedRoles = [authorizedRoles];
-      }
-      return (this.isAuthenticated() &&
-        authorizedRoles.indexOf(Session.userRole) !== -1);
-    }
+
+    // $http({
+    //   method: 'POST',
+    //   url: './src/Service/MongooseService.js',
+    //   data: {
+    //     username: newUser.username,
+    //     email: newUser.email
+    //   }
+    // })
+    //   .then(res => console.log(res), err => console.log(err));
+
   }
+  
 });

@@ -1,1 +1,39 @@
-<h1>{{ menu }}</h1>
+<div class="row">
+    <ul class="collection with-header">
+        <li class="collection-header red white-text">
+            <h4>Drinks</h4></li>
+        <li class="collection-item" ng-repeat="drink in drinks">
+            <div class="row my-menu">
+                <div class="col s3">{{ drink.name }} </div>
+                <div class="col s3">{{ drink.price }}</div>
+                <div class="col s3 credit" ng-class="{hidden: credit > drink.price}">add {{ drink.price - credit }} credits</div>
+                <div class="col s3">
+                <a href="" ng-click="putOrder(drink)" class="btn-floating waves-effect waves-light red secondary-content" ng-class="{disabled: credit < drink.price}"><i class="material-icons">add</i></a></div>
+            </div>
+        </li>
+    </ul>
+    <ul class="collection with-header">
+        <li class="collection-header red white-text">
+            <h4>Dishes</h4></li>
+        <li class="collection-item" ng-repeat="dish in dishes">
+            <div class="row my-menu">
+                <div class="col s3">{{ dish.name }}</div>
+                <div class="col s3">{{ dish.price }}</div>
+                <div class="col s3 credit" ng-class="{hidden: credit > dish.price}"> add {{ dish.price - credit }} credits</div>
+                <div class="col s3"><a href="" ng-click="putOrder(dish)" class="btn-floating waves-effect waves-light red secondary-content" ng-class="{disabled: credit < dish.price}"><i class="material-icons">add</i></a></div>
+            </div>
+        </li>
+    </ul>
+    <ul class="collection with-header">
+        <li class="collection-header red white-text">
+            <h4>Desserts</h4></li>
+        <li class="collection-item" ng-repeat="dessert in desserts">
+            <div class="row my-menu">
+                <div class="col s3">{{ dessert.name }}</div>
+                <div class="col s3">{{ dessert.price }}</div>
+                <div class="col s3 credit" ng-class="{hidden: credit > dessert.price}">add {{ dessert.price - credit }} credits</div>
+                <div class="col s3"><a href="" ng-click="putOrder(dessert)" class="btn-floating waves-effect waves-light red secondary-content" ng-class="{disabled: credit < dessert.price}"><i class="material-icons">add</i></a></div>
+            </div>
+        </li>
+    </ul>
+</div>
