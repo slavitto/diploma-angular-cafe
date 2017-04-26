@@ -64,3 +64,21 @@ exports.putOrder = function(email, dish, cb) {
     });
 
 }
+
+exports.dishesFind = function(cb) {
+    Order.find(function(err, res) {
+        if (err) return console.error(err);
+        cb(res);
+    });
+}
+
+exports.updateOrder = function(order, cb) {
+    Order.update({ _id: order._id }, { $set: { state: order.state }}, function(err, res) {
+        if (err) return console.error(err);
+    });
+
+    Order.find({ email: order.email }, function(err, res) {
+        if (err) return console.error(err);
+        cb(res);
+    });
+}

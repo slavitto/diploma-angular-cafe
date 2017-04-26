@@ -19,7 +19,7 @@
                         </div>
                         <div class="card-action">
                             <p class="flow-text">Credit: {{ customer.credit }}</p>
-                            <a class="waves-effect waves-light btn red"><i class="material-icons right" ng-click="addCredit()">add</i>Add credit</a>
+                            <a class="waves-effect waves-light btn red" ng-click="addCredit()">Add credit<i class="material-icons right">add</i></a>
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                     <li class="collection-header green white-text">
                         <h4>My Order</h4></li>
                     <li class="collection-item" ng-repeat="order in orders">
-                        <div>{{ order.dish }}<span class="secondary-content">{{ order.state }}</span></div>
+                        <div>{{ order.dish.name }}<span class="secondary-content">{{ order.state }}</span></div>
                     </li>
                 </ul>
             </div>

@@ -14,7 +14,8 @@
     "angular-route": "~1.6.4",
     "angular": "~1.6.4",
     "mongoose": "~4.9.6",
-    "express": "~4.15.2"
+    "express": "~4.15.2",
+    "netology-fake-drone-api": "~1.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

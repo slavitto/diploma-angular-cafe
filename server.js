@@ -25,6 +25,18 @@ io.on('connection', function (socket) {
             io.emit('newOrder', newOrder);
         });
     });
+
+    socket.on('cookLogin', function (socket) {
+        mongooseService.dishesFind(orders => {
+            io.emit('orders', orders);
+        });
+    });
+
+    socket.on('updateOrder', function (socket) {
+        mongooseService.updateOrder(socket, orders => {
+            io.emit('updatedOrder', orders);
+        });
+    });
 });
 
 app.use((req, res, next) => {
