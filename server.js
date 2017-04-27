@@ -9,33 +9,37 @@ var mongooseService = require("./src/Service/MongooseService");
 
 app.use('/', express.static(__dirname));
 
-io.on('connection', function (socket) {
-    socket.on('newUser', function (newUser) {
-    	mongooseService.signIn(newUser, newCustomer => {
-    		io.emit('newCustomer', newCustomer);
-    	});
+io.on('connection', function(socket) {
+    socket.on('newUser', function(newUser) {
+        mongooseService.signIn(newUser, newCustomer => {
+            io.emit('newCustomer', newCustomer);
+        });
     });
 
-    socket.on('addCredit', function (socket) {
-    	mongooseService.addCredit(socket.email, socket.credit);
+    socket.on('addCredit', function(socket) {
+        mongooseService.addCredit(socket.email, socket.credit);
     });
 
-    socket.on('putOrder', function (socket) {
+    socket.on('putOrder', function(socket) {
         mongooseService.putOrder(socket.email, socket.dish, newOrder => {
             io.emit('newOrder', newOrder);
         });
     });
 
-    socket.on('cookLogin', function (socket) {
+    socket.on('cookLogin', function(socket) {
         mongooseService.dishesFind(orders => {
             io.emit('orders', orders);
         });
     });
 
-    socket.on('updateOrder', function (socket) {
-        mongooseService.updateOrder(socket, orders => {
-            io.emit('updatedOrder', orders);
+    socket.on('updateOrder', function(socket) {
+        mongooseService.updateOrder(socket, order => {
+            io.emit('updatedOrder', order);
         });
+    });
+
+    socket.on('clearOrders', function(socket) {
+        mongooseService.clearOrders();
     });
 });
 

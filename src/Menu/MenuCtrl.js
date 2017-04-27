@@ -9,7 +9,8 @@ DroneCafeApp
                     $scope.drinks = res.data.drinks;
                     $scope.dishes = res.data.dishes;
                     $scope.desserts = res.data.desserts;
-                    $scope.credit = $cookies.getObject('customer').credit;
+                    var customer = $cookies.getObject('customer');
+                    if(customer) $scope.credit = customer.credit;
                 });
 
             $scope.$on('addCredit', function(socket) {

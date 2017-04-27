@@ -1,9 +1,8 @@
 DroneCafeApp
-    .controller('MyTableCtrl', function($scope, $rootScope, $cookies) {
+    .controller('MyTableCtrl', function($scope, $location, $cookies) {
         var orders = [];
-        // $cookies.remove('customer');
-        $scope.customer = $cookies.getObject('customer') || $rootScope.user;
-        $scope.orders = $scope.customer.orders;
+        $scope.customer = $cookies.getObject('customer');
+        if($scope.customer === undefined) $location.path('/login');
 
         $scope.addCredit = function() {
             $scope.customer.credit += 100;

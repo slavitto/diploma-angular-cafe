@@ -1,9 +1,13 @@
-<a href="" ng-click="refresh()">refresh</a>
 <div class="row">
     <div class="col s6">
         <ul class="collection with-header">
             <li class="collection-header red white-text">
-                <h4>Ordered</h4></li>
+                <div class="row my-menu">
+                    <div class="col s6">
+                        <h4>Ordered</h4></div>
+                    <div class="col s6"><a ng-click="refresh()" class="btn orange">refresh</a></div>
+                </div>
+            </li>
             <li class="collection-item" ng-repeat="order in ordered track by $index">
                 <div class="row my-menu">
                     <div class="col s6">{{ order.dish.name }} </div>
@@ -15,15 +19,21 @@
     </div>
     <div class="col s6">
         <ul class="collection with-header">
-            <li class="collection-header red white-text">
-                <h4>Cooking</h4></li>
+            <li class="collection-header green white-text">
+                <div class="row my-menu">
+                    <div class="col s6">
+                        <h4>Cooking</h4></div>
+                    <div class="col s6"><a ng-click="clear()" class="btn yellow green-text">clear</a></div>
+                </div>
+            </li>
             <li class="collection-item" ng-repeat="order in cooking track by $index">
                 <div class="row my-menu">
                     <div class="col s4">{{ order.dish.name }} </div>
                     <div class="col s4">{{ order.state }} </div>
-                    <div class="col s4"><a ng-click="finishCook(order, $index)" class="waves-effect waves-light btn">Ready</a></div></div>
+                    <div class="col s4"><a ng-click="finishCook(order, $index)" ng-class="{disabled: order.state !== 'cooking'}" class="waves-effect waves-light btn">Ready</a></div>
                 </div>
-            </li>
-        </ul>
     </div>
+    </li>
+    </ul>
+</div>
 </div>
