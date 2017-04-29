@@ -1,7 +1,7 @@
 var express = require("express");
 var app = express();
-var https = require('https').Server(app);
-var io = require('socket.io')(https);
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 var mongooseService = require("./src/Service/MongooseService");
 
@@ -53,4 +53,4 @@ app.use((err, req, res, next) => {
     next(err);
 });
 
-https.listen(app.get('port'));
+http.listen(app.get('port'));
