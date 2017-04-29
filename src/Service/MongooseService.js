@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var drone = require('netology-fake-drone-api');
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost/droneSpaceBar');
+// mongoose.connect('mongodb://localhost/droneSpaceBar');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
