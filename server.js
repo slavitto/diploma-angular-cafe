@@ -6,6 +6,13 @@ var io = require('socket.io')(http);
 var mongooseService = require("./src/Service/MongooseService");
 
 app.set('port', (process.env.PORT || 3000)); //For avoidong Heroku $PORT error
+
+io.configure(function () { 
+  io.set("transports", ["xhr-polling"]); 
+  io.set("polling duration", 10); 
+});
+
+
 app.use('/', express.static(__dirname));
 
 io.on('connection', function(socket) {
