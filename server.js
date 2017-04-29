@@ -5,9 +5,7 @@ var io = require('socket.io')(http);
 
 var mongooseService = require("./src/Service/MongooseService");
 
-//For avoidong Heroku $PORT error
-// app.set('port', (process.env.PORT || 3000));
-app.use('/', express.static(__dirname));
+app.set('port', (process.env.PORT || 3000)); //For avoidong Heroku $PORT error
 
 io.on('connection', function(socket) {
     socket.on('newUser', function(newUser) {
@@ -53,5 +51,4 @@ app.use((err, req, res, next) => {
     next(err);
 });
 
-http.listen(3000);
-// http.listen(app.get('port'));
+http.listen(app.get('port'));
