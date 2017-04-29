@@ -29,5 +29,6 @@ DroneCafeApp
         $scope.finishCook = function(order, index) {
             order.state = "ready";
             socket.emit('updateOrder', order);
+            $scope.cooking.splice(index, 1);
         }
     });
