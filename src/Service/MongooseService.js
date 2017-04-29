@@ -96,12 +96,16 @@ exports.updateOrder = function(order, cb) {
                 User.find({ email: order.email }, function(err, res) {
                     if (err) return console.error(err);
                     var refunded = res[0].credit + order.dish.price;
-                    User.update({ email: res.email }, { $set: { credit:  refunded }});
+                    User.update({ email: res.email }, { $set: { credit: refunded } });
                 });
             });
     }
 }
 
 exports.clearOrders = function() {
-    Order.find({ state: 'served' }).remove().exec();
-}
+        Order
+            .find({
+                    $or[{ state: 'served' }, { state: 'got difficultes' }])
+                .remove()
+                .exec();
+            }

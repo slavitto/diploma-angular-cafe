@@ -8,7 +8,7 @@ DroneCafeApp
             orders.forEach(order => {
                 if (order.state === "ordered") {
                     $scope.ordered.push(order);
-                } else {
+                } else if (order.state === "cooking") {
                     $scope.cooking.push(order);
                 }
             });
