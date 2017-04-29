@@ -1,4 +1,4 @@
-var socket = io('/');
+var socket = io('http://localhost:3000');
 
 DroneCafeApp
 .controller('LoginCtrl', function ($scope, $http, $location, $cookies, $rootScope) {
