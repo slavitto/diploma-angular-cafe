@@ -6,7 +6,10 @@ var io = require('socket.io')(http);
 app.set('port', (process.env.PORT || 3000));
 
 //For avoidong Heroku $PORT error
-app.get('/', express.static(__dirname).listen(app.get('port'), function() {
+app.get('/', function(request, response) {
+    // var result = 'App is running'
+    express.static(__dirname);
+}).listen(app.get('port'), function() {
     console.log('App is running, server is listening on port ', app.get('port'));
 });
 
