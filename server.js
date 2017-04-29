@@ -6,16 +6,16 @@ var io = require('socket.io')(http);
 app.set('port', (process.env.PORT || 3000));
 
 //For avoidong Heroku $PORT error
-app.get('/', function(request, response) {
-    // var result = 'App is running'
-    express.static(__dirname);
-}).listen(app.get('port'), function() {
-    console.log('App is running, server is listening on port ', app.get('port'));
-});
+// app.get('/', function(request, response) {
+//     var result = 'App is running'
+//     response.send(result);
+// }).listen(app.get('port'), function() {
+//     console.log('App is running, server is listening on port ', app.get('port'));
+// });
 
 var mongooseService = require("./src/Service/MongooseService");
 
-// app.get('/', express.static(__dirname));
+app.get('/', express.static(__dirname));
 
 io.on('connection', function(socket) {
     socket.on('newUser', function(newUser) {
@@ -61,4 +61,4 @@ app.use((err, req, res, next) => {
     next(err);
 });
 
-// http.listen(3000);
+http.listen(port);
