@@ -1,17 +1,11 @@
 var express = require("express");
 var app = express();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var io = require('socket.io')(https);
 
 var mongooseService = require("./src/Service/MongooseService");
 
 app.set('port', (process.env.PORT || 3000)); //For avoidong Heroku $PORT error
-
-io.configure(function () { 
-  io.set("transports", ["xhr-polling"]); 
-  io.set("polling duration", 10); 
-});
-
 
 app.use('/', express.static(__dirname));
 
