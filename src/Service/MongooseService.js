@@ -105,7 +105,7 @@ exports.updateOrder = function(order, cb) {
 exports.clearOrders = function() {
         Order
             .find({
-                    $or[{ state: 'served' }, { state: 'got difficultes' }])
+                    $or: [{ state: 'served' }, { state: 'got difficultes' }])
                 .remove()
                 .exec();
             }
