@@ -1,9 +1,8 @@
 DroneCafeApp
     .controller('MyTableCtrl', function($scope, $location, $cookies) {
-        var orders = [];
         $scope.customer = $cookies.getObject('customer');
-        $scope.orders = $scope.customer.orders;
-        if($scope.customer === undefined) $location.path('/login');
+        $scope.orders = $scope.customer.orders || [];
+        if ($scope.customer === undefined) $location.path('/login');
 
         $scope.addCredit = function() {
             $scope.customer.credit += 100;
@@ -18,27 +17,30 @@ DroneCafeApp
         }
 
         socket.on('newOrder', order => {
-            orders.push({ dish: order.dish, state: "ordered" });
-            $scope.orders = orders;
-            $scope.customer.credit = $scope.customer.credit - order.dish.price;
-            $cookies.putObject('customer', {
-                username: $scope.customer.username,
-                email: $scope.customer.email,
-                credit: $scope.customer.credit,
-                orders: orders
+            $scope.$apply(function() {
+                $scope.orders.push({ dish: order.dish, state: "ordered" });
+                $scope.customer.credit = $scope.customer.credit - order.dish.price;
+                $cookies.putObject('customer', {
+                    username: $scope.customer.username,
+                    email: $scope.customer.email,
+                    credit: $scope.customer.credit,
+                    orders: $scope.orders
+                });
             });
         });
 
         socket.on('updatedOrder', updatedOrder => {
-            updatedOrder.map(function(order) {
-                return { dish: order.dish.name, state: order.state };
-            });
-            $scope.orders = updatedOrder;
-            $cookies.putObject('customer', {
-                username: $scope.customer.username,
-                email: $scope.customer.email,
-                credit: $scope.customer.credit,
-                orders: updatedOrder
-            });
+             $scope.$apply(function() { 
+                updatedOrder.map(function(order) {
+                    return { dish: order.dish.name, state: order.state };
+                });
+                $scope.orders = updatedOrder;
+                $cookies.putObject('customer', {
+                    username: $scope.customer.username,
+                    email: $scope.customer.email,
+                    credit: $scope.customer.credit,
+                    orders: updatedOrder
+                });
+             });
         });
     });

@@ -2,33 +2,27 @@ DroneCafeApp
     .controller('KitchenCtrl', function($scope) {
 
         socket.emit('cookLogin');
+
         socket.on('orders', orders => {
-            $scope.ordered = [];
-            $scope.cooking = [];
-            orders.forEach(order => {
-                if (order.state === "ordered") {
-                    $scope.ordered.push(order);
-                } else if (order.state === "cooking") {
-                    $scope.cooking.push(order);
-                }
+            $scope.$apply(function() {
+                $scope.orders = orders;
             });
         });
 
-        $scope.refresh = () => socket.emit('cookLogin');
-        $scope.clear = () => {
-            socket.emit('clearOrders');
-            socket.emit('cookLogin');
-        }
+        socket.on('newOrder', newOrder => {
+            $scope.$apply(function() {
+                $scope.orders.unshift(newOrder);
+            });
+        });
+
         $scope.startCook = function(order, index) {
-            $scope.ordered.splice(index, 1);
-            $scope.cooking.unshift(order);
-            order.state = "cooking";
+            $scope.orders[index].state = "cooking";
             socket.emit('updateOrder', order);
         }
 
         $scope.finishCook = function(order, index) {
             order.state = "ready";
             socket.emit('updateOrder', order);
-            $scope.cooking.splice(index, 1);
+            $scope.orders.splice(index, 1);
         }
     });

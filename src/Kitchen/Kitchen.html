@@ -5,10 +5,9 @@
                 <div class="row my-menu">
                     <div class="col s6">
                         <h4>Ordered</h4></div>
-                    <div class="col s6"><a ng-click="refresh()" class="btn orange">refresh</a></div>
                 </div>
             </li>
-            <li class="collection-item" ng-repeat="order in ordered track by $index">
+            <li class="collection-item" ng-repeat="order in orders track by $index" ng-if="order.state === 'ordered'">
                 <div class="row my-menu">
                     <div class="col s6">{{ order.dish.name }} </div>
                     <div class="col s6">
@@ -23,10 +22,9 @@
                 <div class="row my-menu">
                     <div class="col s6">
                         <h4>Cooking</h4></div>
-                    <div class="col s6"><a ng-click="clear()" class="btn green yellow-text">clear</a></div>
                 </div>
             </li>
-            <li class="collection-item" ng-repeat="order in cooking track by $index">
+            <li class="collection-item" ng-repeat="order in orders track by $index" ng-if="order.state === 'cooking'">
                 <div class="row my-menu">
                     <div class="col s4">{{ order.dish.name }} </div>
                     <div class="col s4">{{ order.state }} </div>

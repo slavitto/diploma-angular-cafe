@@ -17,6 +17,14 @@ var userSchema = new mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 
+var orderSchema = new mongoose.Schema({
+    email: String,
+    dish: Object,
+    state: String
+});
+
+var Order = mongoose.model('Order', orderSchema);
+
 exports.signIn = function(customer, cb) {
 
     var newUser = new User({
@@ -27,11 +35,17 @@ exports.signIn = function(customer, cb) {
 
     User.find({ email: customer.email }, function(err, users) {
         if (err) return console.error(err);
-        if (users.length === 0)
+        if (users.length === 0) {
             newUser.save(function(err, newUser) {
                 if (err) return console.error(err);
+                cb(newUser);
             });
-        cb(users[0] || newUser);
+        } else {
+            Order.find({ email: customer.email }, function(err, orders) {
+                users[0].orders = orders;
+                cb(users[0]);
+            });
+        }
     });
 }
 
@@ -41,17 +55,7 @@ exports.addCredit = function(email, credit) {
     });
 }
 
-
-var orderSchema = new mongoose.Schema({
-    email: String,
-    dish: Object,
-    state: String
-});
-
-var Order = mongoose.model('Order', orderSchema);
-
 exports.putOrder = function(email, dish, cb) {
-
 
     var newOrder = new Order({
         email: email,
@@ -102,10 +106,18 @@ exports.updateOrder = function(order, cb) {
     }
 }
 
-exports.clearOrders = function() {
+exports.logOut = function(customer) {
+
+    User.update({ email: customer.email }, { $set: { credit: customer.credit } }, function(err, res) {
+        if (err) return console.error(err);
+    });
+
     Order
         .find({
-            $or: [{ state: 'served' }, { state: 'got difficultes' }]
+            $and: [{ email: customer.email }, {
+                $or: [{ state: 'served' }, { state: 'got difficultes' }]
+            }]
+
         })
         .remove()
         .exec();

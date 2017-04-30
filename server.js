@@ -38,8 +38,8 @@ io.on('connection', function(socket) {
         });
     });
 
-    socket.on('clearOrders', function(socket) {
-        mongooseService.clearOrders();
+    socket.on('logOut', function(socket) {
+        mongooseService.logOut(socket);
     });
 });
 
