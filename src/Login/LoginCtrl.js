@@ -1,7 +1,7 @@
 var socket = io('/');
 
 DroneCafeApp
-.controller('LoginCtrl', function ($scope, $http, $location, $cookies, $rootScope) {
+.controller('LoginCtrl', function ($scope, $http, $cookies, $rootScope, $window) {
   
   $scope.user = {};
   $cookies.remove('customer'); //logout
@@ -9,21 +9,10 @@ DroneCafeApp
   $scope.login = function(newUser) {
     socket.emit('newUser', newUser);
     socket.on('newCustomer', function(customer) {
+    	console.log('customer');
       $cookies.putObject('customer', customer);
-      $location.path('/');
+      $window.location.href = '/';
     });
   }
   
 });
-// app.factory('Session', function($http) {
-//   var Session = {
-//     data: {},
-//     saveSession: function() { /* save session data to db */ },
-//     updateSession: function() { 
-//       /* load data from db */
-//       $http.get('session.json').then(function(r) { return Session.data = r.data;});
-//     }
-//   };
-//   Session.updateSession();
-//   return Session; 
-// });
