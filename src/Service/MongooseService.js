@@ -42,8 +42,9 @@ exports.signIn = function(customer, cb) {
             });
         } else {
             Order.find({ email: customer.email }, function(err, orders) {
-                users[0].orders = orders;
-                cb(users[0]);
+                var oldUser = users[0];
+                oldUser.orders = orders;
+                cb(oldUser);
             });
         }
     });

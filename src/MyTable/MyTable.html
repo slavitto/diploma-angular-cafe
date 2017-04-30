@@ -30,7 +30,7 @@
                 <ul class="collection with-header">
                     <li class="collection-header green white-text">
                         <h4>My Order</h4></li>
-                    <li class="collection-item" ng-repeat="order in orders">
+                    <li class="collection-item" ng-repeat="order in customer.orders">
                         <div>{{ order.dish.name }}<span class="secondary-content">{{ order.state }}</span></div>
                     </li>
                 </ul>

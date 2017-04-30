@@ -10,9 +10,10 @@ app.set('port', (process.env.PORT || 3000)); //For avoidong Heroku $PORT error
 app.use('/', express.static(__dirname));
 
 io.on('connection', function(socket) {
+
     socket.on('newUser', function(newUser) {
         mongooseService.signIn(newUser, newCustomer => {
-            io.emit('newCustomer', newCustomer);
+            io.emit('newCustomer', { customer: newCustomer, orders: newCustomer.orders });
         });
     });
 
