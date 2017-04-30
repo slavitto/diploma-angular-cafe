@@ -9,7 +9,7 @@ DroneCafeApp
             socket.emit('logOut', cookie);
             cookie.orders = cookie.orders.filter(function(order){
                 return (order.state === "ordered" || order.state === "cooking");
-            });
+            }) || [];
             $cookies.putObject('customer', cookie);
         }
 
