@@ -3,15 +3,20 @@ var socket = io('/');
 DroneCafeApp
     .controller('LoginCtrl', function($scope, $cookies, $window) {
 
-        if ($cookies.getObject('customer'))
-            socket.emit('logOut', $cookies.getObject('customer'));
-        $cookies.remove('customer');
-        $scope.user = {};
+        var cookie = $cookies.getObject('customer');
+
+        if (cookie) {
+            socket.emit('logOut', cookie);
+            cookie.orders = cookie.orders.filter(function(order){
+                return (order.state === "ordered" || order.state === "cooking");
+            });
+            $cookies.putObject('customer', cookie);
+        }
 
         $scope.login = function(newUser) {
             socket.emit('newUser', newUser);
             socket.on('newCustomer', function(newCustomer) {
- 				$cookies.putObject('customer', newCustomer);
+ 				if (!cookie) $cookies.putObject('customer', newCustomer);
                 $window.location.href = '/';
             });
         }

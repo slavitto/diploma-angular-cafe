@@ -13,7 +13,7 @@ io.on('connection', function(socket) {
 
     socket.on('newUser', function(newUser) {
         mongooseService.signIn(newUser, newCustomer => {
-            io.emit('newCustomer', { customer: newCustomer, orders: newCustomer.orders });
+            io.emit('newCustomer', newCustomer);
         });
     });
 

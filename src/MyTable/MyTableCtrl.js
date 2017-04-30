@@ -1,7 +1,7 @@
 DroneCafeApp
     .controller('MyTableCtrl', function($scope, $location, $cookies) {
         $scope.customer = $cookies.getObject('customer');
-        // $scope.orders = $scope.customer.orders || [];
+        $scope.customer.orders =  $cookies.getObject('customer').orders || [];
         if ($scope.customer === undefined) $location.path('/login');
 
         $scope.addCredit = function() {
@@ -34,7 +34,7 @@ DroneCafeApp
                 updatedOrder.map(function(order) {
                     return { dish: order.dish.name, state: order.state };
                 });
-                $scope.orders = updatedOrder;
+                $scope.customer.orders = updatedOrder;
                 $cookies.putObject('customer', {
                     username: $scope.customer.username,
                     email: $scope.customer.email,

@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="src/css/materialize.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Drone Space Cafe</title>
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-route/angular-route.js"></script>
@@ -25,7 +24,7 @@
 <body>
     <nav>
         <div class="nav-wrapper">
-        <i class="material-icons left">surround_sound</i><i class="material-icons left">language</i><i class="material-icons left">settings_input_antenna</i>
+            <i class="material-icons left">surround_sound</i><i class="material-icons left">language</i><i class="material-icons left">settings_input_antenna</i>
             <a href="#!/" class="brand-logo">Drone Space Cafe</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="#!/mytable">My Table</a></li>
@@ -34,7 +33,9 @@
             </ul>
         </div>
     </nav>
-    <ng-view></ng-view>
+    <main>
+        <ng-view></ng-view>
+    </main>
     <footer class="page-footer">
         <div class="footer-copyright">
             <div class="container">
