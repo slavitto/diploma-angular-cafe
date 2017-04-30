@@ -5,7 +5,7 @@ DroneCafeApp
 
         var cookie = $cookies.getObject('customer');
 
-        if (cookie) {
+        if (cookie !== undefined) {
             socket.emit('logOut', cookie);
             cookie.orders = cookie.orders.filter(function(order){
                 return (order.state === "ordered" || order.state === "cooking");
