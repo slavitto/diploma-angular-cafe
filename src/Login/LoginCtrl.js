@@ -2,8 +2,8 @@ var socket = io('/');
 
 DroneCafeApp
     .controller('LoginCtrl', function($scope, $cookies, $window) {
-
-        socket.emit('logOut', $cookies.getObject('customer'));
+        var cookie = $cookies.getObject('customer');
+        if(cookie !== undefined) socket.emit('logOut', cookie);
 
         $scope.login = function(newUser) {
             socket.emit('newUser', newUser);
