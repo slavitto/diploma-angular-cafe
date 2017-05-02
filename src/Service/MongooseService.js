@@ -42,9 +42,7 @@ exports.signIn = function(customer, cb) {
             });
         } else {
             Order.find({ email: customer.email }, function(err, orders) {
-                var oldUser = users[0];
-                oldUser.orders = orders;
-                cb(oldUser);
+                cb(users[0], orders);
             });
         }
     });
