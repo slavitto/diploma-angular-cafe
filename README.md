@@ -2,13 +2,13 @@
 Рабочая версия: https://drone-space-bar.herokuapp.com   
 
 ## Архитектура системы  
-### Директории  
-+--**node_modules** - системные компоненты  
-+--**tests** - тесты  
-+--**src** - файлы приложения  
-   +--**css**
+### Файловая структура проекта  
+* **node_modules** - системные компоненты  
+* **tests** - тесты  
+* **src** - файлы приложения  
+   * **css** - файлы стилей (используется Materialize)
+   * **fonts** - шрифты Materialize
+   * **js** - библиотеки (jQuery, Materialize, socket.io)
+   * **Kitchen, Login, MyTable, Menu, Service** - модули и компоненты приложения
+   * **DroneCafeApp.js** - 
 ### Модули
-
-  g g g g
-
-
