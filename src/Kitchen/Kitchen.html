@@ -7,7 +7,7 @@
                         <h4>Ordered</h4></div>
                 </div>
             </li>
-            <li class="collection-item" ng-repeat="order in orders track by $index" ng-if="order.state === 'ordered'">
+            <li class="collection-item" ng-repeat="order in orders track by $index" ng-if="order.state === 'ordered'" id="ordered">
                 <div class="row my-menu">
                     <div class="col s6">{{ order.dish.name }} </div>
                     <div class="col s6">
@@ -24,7 +24,7 @@
                         <h4>Cooking</h4></div>
                 </div>
             </li>
-            <li class="collection-item" ng-repeat="order in orders track by $index" ng-if="order.state === 'cooking'">
+            <li class="collection-item" ng-repeat="order in orders track by $index" ng-if="order.state === 'cooking'" id="cooking">
                 <div class="row my-menu">
                     <div class="col s4">{{ order.dish.name }} </div>
                     <div class="col s4">{{ order.state }} </div>
