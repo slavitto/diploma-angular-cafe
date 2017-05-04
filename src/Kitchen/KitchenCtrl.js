@@ -1,5 +1,5 @@
 DroneCafeApp
-    .controller('KitchenCtrl', function($scope) {
+    .controller('KitchenCtrl', ["$scope", function($scope) {
 
         socket.emit('cookLogin');
 
@@ -25,4 +25,4 @@ DroneCafeApp
             socket.emit('updateOrder', order);
             $scope.orders.splice(index, 1);
         }
-    });
+    }]);

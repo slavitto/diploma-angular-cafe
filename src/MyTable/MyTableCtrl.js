@@ -1,5 +1,5 @@
 DroneCafeApp
-    .controller('MyTableCtrl', function($scope, $location, $cookies) {
+    .controller('MyTableCtrl', ["$scope", "$location", "$cookies", function($scope, $location, $cookies) {
         $scope.customer = $cookies.getObject('customer');
         if ($scope.customer === undefined) $location.path('/login');
         $scope.customer.orders =  $cookies.getObject('customer').orders || [];
@@ -30,7 +30,7 @@ DroneCafeApp
         });
 
         socket.on('updatedOrder', updatedOrder => {
-             $scope.$apply(function() { 
+             $scope.$apply(function() {
                 updatedOrder.map(function(order) {
                     return { dish: order.dish.name, state: order.state };
                 });
@@ -43,4 +43,4 @@ DroneCafeApp
                 });
              });
         });
-    });
+    }]);

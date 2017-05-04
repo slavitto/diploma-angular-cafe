@@ -1,8 +1,8 @@
 var socket = io('/');
 
 DroneCafeApp
-    .controller('LoginCtrl', function($scope, $cookies, $window) {
-        
+    .controller('LoginCtrl', ["$scope", "$cookies", "$window", function($scope, $cookies, $window) {
+
         var cookie = $cookies.getObject('customer');
         if(cookie !== undefined) socket.emit('logOut', cookie);
 
@@ -14,8 +14,8 @@ DroneCafeApp
                         email: res.customer.email,
                         credit: res.customer.credit,
                         orders: res.orders
-                    });                     
+                    });
                 $window.location.href = '/';
             });
         }
-    });
+    }]);

@@ -2,7 +2,7 @@ DroneCafeApp
     .controller('MenuCtrl')
     .component('menuList', {
         templateUrl: './src/Menu/Menu.html',
-        controller: function($scope, $http, $cookies) {
+        controller: ["$scope", "$http", "$cookies", function($scope, $http, $cookies) {
             $http
                 .get('./src/Menu/menu.json')
                 .then(function(res) {
@@ -22,5 +22,5 @@ DroneCafeApp
                 socket.emit('putOrder', { email: email, dish: dish });
                 $scope.credit = $scope.credit - dish.price;
             }
-        }
+        }]
     });
