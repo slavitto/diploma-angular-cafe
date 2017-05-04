@@ -30,17 +30,18 @@ DroneCafeApp
         });
 
         socket.on('updatedOrder', updatedOrder => {
-             $scope.$apply(function() {
-                updatedOrder.map(function(order) {
-                    return { dish: order.dish.name, state: order.state };
-                });
-                $scope.customer.orders = updatedOrder;
+            $scope.$apply(function() {
+                var notExpired = updatedOrder.filter(function(order) {
+                    return order.state !== "expired";
+                }); 
+                
+                $scope.customer.orders = notExpired;
                 $cookies.putObject('customer', {
                     username: $scope.customer.username,
                     email: $scope.customer.email,
                     credit: $scope.customer.credit,
-                    orders: updatedOrder
+                    orders: notExpired
                 });
-             });
+            });
         });
     }]);

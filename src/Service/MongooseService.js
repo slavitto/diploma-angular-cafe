@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var drone = require('netology-fake-drone-api');
 mongoose.Promise = global.Promise;
 
-// mongoose.connect('mongodb://localhost/droneSpaceBar');
-mongoose.connect('mongodb://dronespacebar:drone123spacebar@ds125481.mlab.com:25481/heroku_hzsmwmn9');
+mongoose.connect('mongodb://localhost/droneSpaceBar');
+// mongoose.connect('mongodb://dronespacebar:drone123spacebar@ds125481.mlab.com:25481/heroku_hzsmwmn9');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -64,9 +64,15 @@ exports.putOrder = function(email, dish, cb) {
 
     newOrder.save(function(err, order) {
         if (err) return console.error(err);
-        cb(order);
+            User.find({ email: email }, (err, res) => {
+            if (err) return console.error(err);
+            var newCredit = res[0].credit - dish.price;
+            User.update({ email: email }, { $set: { credit: newCredit } }, function(err, res) {
+                if (err) return console.error(err);
+                cb(order, newCredit);
+            });
+        });
     });
-
 }
 
 exports.dishesFind = function(cb) {
@@ -82,6 +88,12 @@ exports.updateOrder = function(order, cb) {
         if (err) return console.error(err);
         Order.find({ email: order.email }, function(err, res) {
             if (err) return console.error(err);
+            if(order.state === "served" || order.state === "got difficultes") {
+               setTimeout(() => {
+                    order.state = "expired";
+                    exports.updateOrder(order, cb);
+               }, 120000);     
+            }
             cb(res);
         });
     });
@@ -99,7 +111,9 @@ exports.updateOrder = function(order, cb) {
                 User.find({ email: order.email }, function(err, res) {
                     if (err) return console.error(err);
                     var refunded = res[0].credit + order.dish.price;
-                    User.update({ email: res.email }, { $set: { credit: refunded } });
+                    User.update({ email: res[0].email }, { $set: { credit: refunded } }, (err) => {
+                        if (err) return console.error(err);
+                    }); 
                 });
             });
     }
@@ -114,7 +128,7 @@ exports.logOut = function(customer) {
     Order
         .find({
             $and: [{ email: customer.email }, {
-                $or: [{ state: 'served' }, { state: 'got difficultes' }]
+                $or: [{ state: 'expired' }, { state: 'served' }, { state: 'got difficultes' }]
             }]
 
         })
