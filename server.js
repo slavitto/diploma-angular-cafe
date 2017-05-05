@@ -36,6 +36,7 @@ io.on('connection', function(socket) {
     socket.on('updateOrder', function(socket) {
         mongooseService.updateOrder(socket, order => {
             io.emit('updatedOrder', order);
+            if(order.refund) io.emit('refund', order.refund);
         });
     });
 

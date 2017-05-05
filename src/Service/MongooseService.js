@@ -94,6 +94,7 @@ exports.updateOrder = function(order, cb) {
                     exports.updateOrder(order, cb);
                }, 120000);     
             }
+            if(order.state === "got difficultes") res.refund = order.dish.price;
             cb(res);
         });
     });

@@ -13,8 +13,9 @@ DroneCafeApp
                     if(customer) $scope.credit = customer.credit;
                 });
 
-            $scope.$on('addCredit', function(socket) {
-                $scope.credit += 100;
+            $scope.$on('addCredit', function(addCredit, addedCredit) {
+                console.log(addedCredit);
+                $scope.credit += addedCredit;
             });
 
             $scope.putOrder = function(dish) {
